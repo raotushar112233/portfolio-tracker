@@ -1,0 +1,54 @@
+/* App.css */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #DA291C; /* Manchester United Red */
+  color: #fff; /* White text */
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  margin-top: 20px;
+  color: #FBE122; /* Gold */
+  text-shadow: 2px 2px 5px black;
+}
+
+.container {
+  max-width: 600px;
+  margin: 50px auto;
+  background: black;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(255, 215, 0, 0.5); /* Gold Shadow */
+}
+
+button {
+  background-color: #FBE122; /* Gold */
+  color: black;
+  font-weight: bold;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+button:hover {
+  background-color: #FFD700; /* Bright Gold */
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  background: #FBE122; /* Gold */
+  color: black;
+  font-weight: bold;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 5px;
+  box-shadow: 0px 2px 5px rgba(255, 215, 0, 0.5);
+}

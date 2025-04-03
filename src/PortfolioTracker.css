@@ -1,68 +1,141 @@
+/* Set global background to Real Madrid's white theme */
+body {
+  background: linear-gradient(135deg, #ffffff, #f0f0f0); /* Soft white gradient */
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+/* Main container */
 .portfolio-container {
   max-width: 600px;
-  margin: 50px auto;
   padding: 20px;
   background: linear-gradient(135deg, #ffffff, #f7f7f7); /* White gradient */
-  border-radius: 10px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
   text-align: center;
-  border: 2px solid #febd11; /* Gold border */
+  border: 3px solid #febd11; /* Gold border */
+  transition: 0.3s;
 }
 
+.portfolio-container:hover {
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Heading */
 h2 {
   color: #0c1c8c; /* Real Madrid dark blue */
+  font-size: 24px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
-
+/* Buttons */
 button {
   background: #febd11; /* Gold button */
   color: #0c1c8c; /* Dark blue text */
   border: none;
-  padding: 10px 15px;
-  margin: 10px 0;
+  padding: 12px 18px;
+  margin: 10px 5px;
   cursor: pointer;
-  border-radius: 5px;
+  border-radius: 6px;
   font-size: 16px;
   font-weight: bold;
+  transition: 0.3s ease-in-out;
 }
 
 button:hover {
   background: #f5a623; /* Darker gold */
+  transform: scale(1.05);
 }
 
+/* Input fields */
 input {
-  padding: 10px;
+  padding: 12px;
   margin-right: 10px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
+  border: 2px solid #0c1c8c;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: 0.2s;
 }
 
+input:focus {
+  border-color: #febd11;
+  outline: none;
+  box-shadow: 0 0 5px rgba(254, 189, 17, 0.5);
+}
+
+/* Stock list */
 ul {
   list-style-type: none;
   padding: 0;
 }
 
 li {
-  background: #f4f4f4;
-  padding: 10px;
-  margin: 5px 0;
-  border-radius: 5px;
-  border: 1px solid #ddd;
+  background: #ffffff;
+  padding: 12px;
+  margin: 6px 0;
+  border-radius: 6px;
+  border: 2px solid #ddd;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  transition: 0.3s;
+}
+
+li:hover {
+  background: #f0f0f0;
+  transform: translateY(-2px);
 }
 
 li span {
   font-size: 16px;
+  font-weight: bold;
 }
 
+/* Images (logos, profile pics, etc.) */
 img {
   border: 2px solid #febd11; /* Gold border for images */
   border-radius: 50%;
+  width: 35px;
+  height: 35px;
 }
 
+/* Watchlist heading */
 h3 {
   color: #0c1c8c; /* Dark blue */
   font-weight: bold;
+  margin-top: 15px;
+  text-transform: uppercase;
+  border-bottom: 2px solid #febd11;
+  display: inline-block;
+  padding-bottom: 5px;
+}
+
+/* Footer */
+.footer {
+  margin-top: 20px;
+  font-size: 14px;
+  color: #333;
+}
+
+/* Dots (Real Madrid Theme) */
+.dot {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  display: inline-block;
+  margin: 5px;
+  background-color: #febd11; 
+  border: 2px solid #0c1c8c; 
+}
+
+/* Add smooth animation to all elements */
+* {
+  transition: all 0.2s ease-in-out;
 }

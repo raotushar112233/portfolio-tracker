@@ -1,6 +1,5 @@
 import "./PortfolioTracker.css";
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 
 function PortfolioTracker() {
   const [portfolio, setPortfolio] = useState([]);
@@ -74,7 +73,7 @@ function PortfolioTracker() {
   useEffect(() => {
     const interval = setInterval(updateStockPrices, 5000);
     return () => clearInterval(interval);
-  }, [portfolio]);
+  }, [updateStockPrices]); // Added dependency to avoid missing dependency warning
 
   return (
     <div className="portfolio-container">

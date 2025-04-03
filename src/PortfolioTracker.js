@@ -1,8 +1,9 @@
 import "./PortfolioTracker.css";
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 
 function PortfolioTracker() {
   const [portfolio, setPortfolio] = useState([]);
+  const [watchlist, setWatchlist] = useState([]);
   const [customStock, setCustomStock] = useState({ name: "", price: "" });
   const [totalValue, setTotalValue] = useState(0);
   const [previousPrices, setPreviousPrices] = useState({});
@@ -44,40 +45,32 @@ function PortfolioTracker() {
     setPortfolio((prev) => prev.filter((_, i) => i !== index));
   };
 
-  // ✅ Wrap updateStockPrices in useCallback to prevent re-creation
-  const updateStockPrices = useCallback(() => {
+  const updateStockPrices = () => {
     setPortfolio((prevPortfolio) => {
-      const updatedPortfolio = prevPortfolio.map((stock) => {
+      return prevPortfolio.map((stock) => {
         const change = (Math.random() * 10 - 5) / 100;
         const newPrice = stock.price + stock.price * change;
         const oldPrice = previousPrices[stock.name] || stock.price;
         const percentageChange = ((newPrice - oldPrice) / oldPrice) * 100;
-
-        return {
-          ...stock,
-          price: newPrice,
-          percentageChange: percentageChange.toFixed(2)
-        };
+        return { ...stock, price: newPrice, percentageChange: percentageChange.toFixed(2) };
       });
-
-      const total = updatedPortfolio.reduce((sum, stock) => sum + stock.price, 0);
-      setTotalValue(total);
-
-      return updatedPortfolio;
     });
-
-    setPreviousPrices((prevPrices) => {
-      return portfolio.reduce((acc, stock) => {
-        acc[stock.name] = stock.price;
-        return acc;
-      }, { ...prevPrices });
-    });
-  }, [portfolio, previousPrices]); // ✅ Dependencies are stable now
+  };
 
   useEffect(() => {
     const interval = setInterval(updateStockPrices, 5000);
     return () => clearInterval(interval);
-  }, [updateStockPrices]); // ✅ No warning now
+  }, []);
+
+  const addToWatchlist = (stock) => {
+    if (!watchlist.some((s) => s.name === stock.name)) {
+      setWatchlist([...watchlist, stock]);
+    }
+  };
+
+  const removeFromWatchlist = (index) => {
+    setWatchlist((prev) => prev.filter((_, i) => i !== index));
+  };
 
   return (
     <div className="portfolio-container">
@@ -112,6 +105,18 @@ function PortfolioTracker() {
               {stock.percentageChange}%
             </span>
             <button onClick={() => removeStock(index)}>Remove</button>
+            <button onClick={() => addToWatchlist(stock)}>Add to Watchlist</button>
+          </li>
+        ))}
+      </ul>
+
+      <h3>📌 Watchlist</h3>
+      <ul>
+        {watchlist.map((stock, index) => (
+          <li key={index}>
+            <img src={stock.logo} alt={stock.name} style={{ width: "30px" }} />
+            <span>{stock.name} - ${stock.price.toFixed(2)}</span>
+            <button onClick={() => removeFromWatchlist(index)}>Remove</button>
           </li>
         ))}
       </ul>

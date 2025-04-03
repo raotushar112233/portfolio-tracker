@@ -2,30 +2,32 @@
   max-width: 600px;
   margin: 50px auto;
   padding: 20px;
-  background: #ffffff; /* White background */
+  background: linear-gradient(135deg, #ffffff, #f7f7f7); /* White gradient */
   border-radius: 10px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
   text-align: center;
-  border: 2px solid #7f5af0; /* Violet border */
+  border: 2px solid #febd11; /* Gold border */
 }
 
 h2 {
-  color: #7f5af0; /* Violet heading */
+  color: #0c1c8c; /* Real Madrid dark blue */
 }
 
+
 button {
-  background: #7f5af0; /* Violet button */
-  color: white;
+  background: #febd11; /* Gold button */
+  color: #0c1c8c; /* Dark blue text */
   border: none;
   padding: 10px 15px;
   margin: 10px 0;
   cursor: pointer;
   border-radius: 5px;
   font-size: 16px;
+  font-weight: bold;
 }
 
 button:hover {
-  background: #6a48d7; /* Darker violet */
+  background: #f5a623; /* Darker gold */
 }
 
 input {
@@ -56,11 +58,11 @@ li span {
 }
 
 img {
-  border: 2px solid #7f5af0;
+  border: 2px solid #febd11; /* Gold border for images */
   border-radius: 50%;
 }
 
 h3 {
-  color: #333;
+  color: #0c1c8c; /* Dark blue */
   font-weight: bold;
 }

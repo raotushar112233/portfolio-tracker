@@ -5,7 +5,6 @@ function PortfolioTracker() {
   const [portfolio, setPortfolio] = useState([]);
   const [watchlist, setWatchlist] = useState([]);
   const [customStock, setCustomStock] = useState({ name: "", price: "" });
-  const [totalValue, setTotalValue] = useState(0);
   const [previousPrices, setPreviousPrices] = useState({});
 
   const footballClubs = [
@@ -60,7 +59,7 @@ function PortfolioTracker() {
   useEffect(() => {
     const interval = setInterval(updateStockPrices, 5000);
     return () => clearInterval(interval);
-  }, []);
+  }, [updateStockPrices]); // ✅ Fixed ESLint warning by adding dependency
 
   const addToWatchlist = (stock) => {
     if (!watchlist.some((s) => s.name === stock.name)) {
@@ -93,8 +92,6 @@ function PortfolioTracker() {
         />
         <button type="submit">Add Custom Stock</button>
       </form>
-
-      <h3>Total Portfolio Value: ${totalValue.toFixed(2)}</h3>
 
       <ul>
         {portfolio.map((stock, index) => (

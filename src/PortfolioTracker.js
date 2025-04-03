@@ -73,7 +73,7 @@ function PortfolioTracker() {
   useEffect(() => {
     const interval = setInterval(updateStockPrices, 5000);
     return () => clearInterval(interval);
-  }, [updateStockPrices]); // Added dependency to avoid missing dependency warning
+  }, [updateStockPrices]); // ✅ Included updateStockPrices in dependency array
 
   return (
     <div className="portfolio-container">

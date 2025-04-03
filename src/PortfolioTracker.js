@@ -1,5 +1,5 @@
 import "./PortfolioTracker.css";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 
 function PortfolioTracker() {
   const [portfolio, setPortfolio] = useState([]);
@@ -44,36 +44,40 @@ function PortfolioTracker() {
     setPortfolio((prev) => prev.filter((_, i) => i !== index));
   };
 
-  const updateStockPrices = () => {
-    const updatedPortfolio = portfolio.map((stock) => {
-      const change = (Math.random() * 10 - 5) / 100;
-      const newPrice = stock.price + stock.price * change;
-      const oldPrice = previousPrices[stock.name];
-      const percentageChange = ((newPrice - oldPrice) / oldPrice) * 100;
+  // ✅ Wrap updateStockPrices in useCallback to prevent re-creation
+  const updateStockPrices = useCallback(() => {
+    setPortfolio((prevPortfolio) => {
+      const updatedPortfolio = prevPortfolio.map((stock) => {
+        const change = (Math.random() * 10 - 5) / 100;
+        const newPrice = stock.price + stock.price * change;
+        const oldPrice = previousPrices[stock.name] || stock.price;
+        const percentageChange = ((newPrice - oldPrice) / oldPrice) * 100;
 
-      return {
-        ...stock,
-        price: newPrice,
-        percentageChange: percentageChange.toFixed(2)
-      };
+        return {
+          ...stock,
+          price: newPrice,
+          percentageChange: percentageChange.toFixed(2)
+        };
+      });
+
+      const total = updatedPortfolio.reduce((sum, stock) => sum + stock.price, 0);
+      setTotalValue(total);
+
+      return updatedPortfolio;
     });
 
-    setPortfolio(updatedPortfolio);
-
-    const newPrices = updatedPortfolio.reduce((acc, stock) => {
-      acc[stock.name] = stock.price;
-      return acc;
-    }, {});
-    setPreviousPrices(newPrices);
-
-    const total = updatedPortfolio.reduce((sum, stock) => sum + stock.price, 0);
-    setTotalValue(total);
-  };
+    setPreviousPrices((prevPrices) => {
+      return portfolio.reduce((acc, stock) => {
+        acc[stock.name] = stock.price;
+        return acc;
+      }, { ...prevPrices });
+    });
+  }, [portfolio, previousPrices]); // ✅ Dependencies are stable now
 
   useEffect(() => {
     const interval = setInterval(updateStockPrices, 5000);
     return () => clearInterval(interval);
-  }, [updateStockPrices]); // ✅ Included updateStockPrices in dependency array
+  }, [updateStockPrices]); // ✅ No warning now
 
   return (
     <div className="portfolio-container">

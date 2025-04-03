@@ -1,5 +1,5 @@
 import "./PortfolioTracker.css";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 
 function PortfolioTracker() {
   const [portfolio, setPortfolio] = useState([]);
@@ -44,7 +44,7 @@ function PortfolioTracker() {
     setPortfolio((prev) => prev.filter((_, i) => i !== index));
   };
 
-  const updateStockPrices = () => {
+  const updateStockPrices = useCallback(() => {
     setPortfolio((prevPortfolio) => {
       return prevPortfolio.map((stock) => {
         const change = (Math.random() * 10 - 5) / 100;
@@ -54,12 +54,12 @@ function PortfolioTracker() {
         return { ...stock, price: newPrice, percentageChange: percentageChange.toFixed(2) };
       });
     });
-  };
+  }, [previousPrices]);
 
   useEffect(() => {
     const interval = setInterval(updateStockPrices, 5000);
     return () => clearInterval(interval);
-  }, [updateStockPrices]); // ✅ Fixed ESLint warning by adding dependency
+  }, [updateStockPrices]);
 
   const addToWatchlist = (stock) => {
     if (!watchlist.some((s) => s.name === stock.name)) {

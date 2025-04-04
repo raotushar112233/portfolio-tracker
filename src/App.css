@@ -1,8 +1,8 @@
 /* App.css */
 body {
   font-family: Arial, sans-serif;
-  background-color: #DA291C; /* Manchester United Red */
-  color: #fff; /* White text */
+  background-color: #ffffff; /* Real Madrid White */
+  color: #febd11; /* Gold text */
   text-align: center;
   margin: 0;
   padding: 0;
@@ -10,22 +10,22 @@ body {
 
 h1 {
   margin-top: 20px;
-  color: #FBE122; /* Gold */
+  color: #febd11; /* Gold */
   text-shadow: 2px 2px 5px black;
 }
 
 .container {
   max-width: 600px;
   margin: 50px auto;
-  background: black;
+  background: #041E42; /* Deep Blue (Real Madrid Secondary Color) */
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0px 4px 10px rgba(255, 215, 0, 0.5); /* Gold Shadow */
 }
 
 button {
-  background-color: #FBE122; /* Gold */
-  color: black;
+  background-color: #febd11; /* Gold */
+  color: #041E42; /* Deep Blue text */
   font-weight: bold;
   border: none;
   padding: 10px 20px;
@@ -35,7 +35,7 @@ button {
 }
 
 button:hover {
-  background-color: #FFD700; /* Bright Gold */
+  background-color: #ffd700; /* Bright Gold */
 }
 
 ul {
@@ -44,11 +44,24 @@ ul {
 }
 
 li {
-  background: #FBE122; /* Gold */
-  color: black;
+  background: #febd11; /* Gold */
+  color: #041E42; /* Deep Blue */
   font-weight: bold;
   padding: 10px;
   margin: 10px 0;
   border-radius: 5px;
   box-shadow: 0px 2px 5px rgba(255, 215, 0, 0.5);
 }
+
+/* Chart Specific Styling */
+.chart-container {
+  background: #041E42; /* Deep Blue */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(255, 215, 0, 0.5);
+}
+
+.checkbox-container label {
+  color: #ffffff; /* White text for better contrast */
+}
+

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import PortfolioTracker from "./PortfolioTracker";
-import MultiAssetChart from "./MultiAssetChart"; 
+import MultiAssetChart from "./MultiAssetChart";
+import CandleChart from "./CandleChart"; // ✅ IMPORTED CANDLECHART
 import "./App.css";
 
 const sampleData = {
@@ -11,7 +12,7 @@ const sampleData = {
 };
 
 function App() {
-  const [selectedAssets, setSelectedAssets] = useState(["Apple (AAPL)", "Bitcoin (BTC)"]); // Default selected assets
+  const [selectedAssets, setSelectedAssets] = useState(["Apple (AAPL)", "Bitcoin (BTC)"]);
 
   return (
     <div>
@@ -26,14 +27,15 @@ function App() {
       }}>
         ⚪🟡 My Portfolio Tracker 🟡⚪
       </h1>
-      
+
+      {/* ✅ Portfolio Tracker */}
       <PortfolioTracker />
 
-      {/* ✅ Dropdown for selecting assets */}
+      {/* ✅ Dropdown to choose assets for line chart */}
       <div className="chart-controls" style={{ textAlign: "center", marginTop: "20px" }}>
         <h2 style={{ color: "#0c1c8c" }}>Select Assets for Chart</h2>
-        <select 
-          multiple 
+        <select
+          multiple
           onChange={(e) => {
             const selected = Array.from(e.target.selectedOptions, option => option.value);
             setSelectedAssets(selected);
@@ -46,10 +48,16 @@ function App() {
         </select>
       </div>
 
-      {/* ✅ Display the chart with selected assets */}
+      {/* ✅ Multi-Asset Line Chart */}
       <div className="chart-container" style={{ marginTop: "20px" }}>
         <h2 style={{ color: "#0c1c8c" }}>Multi-Asset Chart</h2>
         <MultiAssetChart selectedAssets={selectedAssets} setSelectedAssets={setSelectedAssets} />
+      </div>
+
+      {/* ✅ Candlestick Pattern Chart Section */}
+      <div className="chart-container" style={{ marginTop: "40px" }}>
+        <h2 style={{ color: "#0c1c8c" }}>🕯️ Candlestick Pattern Recognition</h2>
+        <CandleChart />
       </div>
     </div>
   );

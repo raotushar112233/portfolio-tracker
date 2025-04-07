@@ -15,9 +15,17 @@ function PortfolioTracker() {
     { name: "Arsenal", symbol: "ARS", price: 112.4, logo: "https://logo.clearbit.com/arsenal.com" }
   ];
 
+  const generateSentiment = () => {
+    const sentiments = ["Positive", "Neutral", "Negative"];
+    return sentiments[Math.floor(Math.random() * sentiments.length)];
+  };
+
   const addRandomStock = () => {
     const randomClub = footballClubs[Math.floor(Math.random() * footballClubs.length)];
-    setPortfolio((prev) => [...prev, { ...randomClub, percentageChange: 0 }]);
+    setPortfolio((prev) => [
+      ...prev,
+      { ...randomClub, percentageChange: 0, sentiment: generateSentiment() }
+    ]);
     setPreviousPrices((prev) => ({ ...prev, [randomClub.name]: randomClub.price }));
   };
 
@@ -28,7 +36,8 @@ function PortfolioTracker() {
         name: customStock.name,
         price: parseFloat(customStock.price),
         logo: getInitialLogo(customStock.name),
-        percentageChange: 0
+        percentageChange: 0,
+        sentiment: generateSentiment()
       };
       setPortfolio((prev) => [...prev, newStock]);
       setPreviousPrices((prev) => ({ ...prev, [customStock.name]: parseFloat(customStock.price) }));
@@ -51,7 +60,12 @@ function PortfolioTracker() {
         const newPrice = stock.price + stock.price * change;
         const oldPrice = previousPrices[stock.name] || stock.price;
         const percentageChange = ((newPrice - oldPrice) / oldPrice) * 100;
-        return { ...stock, price: newPrice, percentageChange: percentageChange.toFixed(2) };
+        return {
+          ...stock,
+          price: newPrice,
+          percentageChange: percentageChange.toFixed(2),
+          sentiment: generateSentiment()
+        };
       });
     });
   }, [previousPrices]);
@@ -69,6 +83,12 @@ function PortfolioTracker() {
 
   const removeFromWatchlist = (index) => {
     setWatchlist((prev) => prev.filter((_, i) => i !== index));
+  };
+
+  const getSentimentColor = (sentiment) => {
+    if (sentiment === "Positive") return "limegreen";
+    if (sentiment === "Neutral") return "gold";
+    return "crimson";
   };
 
   return (
@@ -98,10 +118,13 @@ function PortfolioTracker() {
           <li key={index}>
             <img src={stock.logo} alt={stock.name} style={{ width: "30px" }} />
             <span>{stock.name} - ${stock.price.toFixed(2)}</span>
-            <span style={{ color: stock.percentageChange >= 0 ? "green" : "red" }}>
+            <span style={{ color: stock.percentageChange >= 0 ? "green" : "red", marginLeft: "10px" }}>
               {stock.percentageChange}%
             </span>
-            <button onClick={() => removeStock(index)}>Remove</button>
+            <span style={{ color: getSentimentColor(stock.sentiment), marginLeft: "10px" }}>
+              🧠 {stock.sentiment}
+            </span>
+            <button onClick={() => removeStock(index)} style={{ marginLeft: "10px" }}>Remove</button>
             <button onClick={() => addToWatchlist(stock)}>Add to Watchlist</button>
           </li>
         ))}

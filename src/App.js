@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import PortfolioTracker from "./PortfolioTracker";
 import MultiAssetChart from "./MultiAssetChart";
-import CandleChart from "./CandleChart"; // ✅ IMPORTED CANDLECHART
+import CandleChart from "./CandleChart";
+import BacktestSimulator from "./BacktestSimulator"; // ✅ NEW IMPORT
 import "./App.css";
 
 const sampleData = {
@@ -58,6 +59,12 @@ function App() {
       <div className="chart-container" style={{ marginTop: "40px" }}>
         <h2 style={{ color: "#0c1c8c" }}>🕯️ Candlestick Pattern Recognition</h2>
         <CandleChart />
+      </div>
+
+      {/* ✅ Backtesting Feature Section */}
+      <div className="chart-container" style={{ marginTop: "40px" }}>
+        <h2 style={{ color: "#0c1c8c" }}>📊 Strategy Backtesting</h2>
+        <BacktestSimulator />
       </div>
     </div>
   );

@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import PortfolioTracker from "./PortfolioTracker";
 import MultiAssetChart from "./MultiAssetChart";
 import CandleChart from "./CandleChart";
-import BacktestSimulator from "./BacktestSimulator"; // ✅ NEW IMPORT
+import BacktestSimulator from "./BacktestSimulator";
+import TradingBot from "./TradingBot"; // ✅ NEW IMPORT
 import "./App.css";
 
 const sampleData = {
@@ -65,6 +66,12 @@ function App() {
       <div className="chart-container" style={{ marginTop: "40px" }}>
         <h2 style={{ color: "#0c1c8c" }}>📊 Strategy Backtesting</h2>
         <BacktestSimulator />
+      </div>
+
+      {/* ✅ Trading Bot Feature Section */}
+      <div className="chart-container" style={{ marginTop: "40px" }}>
+        <h2 style={{ color: "#0c1c8c" }}>🤖 Algorithmic Trading Bot</h2>
+        <TradingBot />
       </div>
     </div>
   );

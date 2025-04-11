@@ -3,7 +3,8 @@ import PortfolioTracker from "./PortfolioTracker";
 import MultiAssetChart from "./MultiAssetChart";
 import CandleChart from "./CandleChart";
 import BacktestSimulator from "./BacktestSimulator";
-import TradingBot from "./TradingBot"; // ✅ NEW IMPORT
+import TradingBot from "./TradingBot";
+import AnalyticsDashboard from "./AnalyticsDashboard"; // ✅ NEW IMPORT
 import "./App.css";
 
 const sampleData = {
@@ -72,6 +73,11 @@ function App() {
       <div className="chart-container" style={{ marginTop: "40px" }}>
         <h2 style={{ color: "#0c1c8c" }}>🤖 Algorithmic Trading Bot</h2>
         <TradingBot />
+      </div>
+
+      {/* ✅ Analytics Dashboard Section */}
+      <div className="chart-container" style={{ marginTop: "40px" }}>
+        <AnalyticsDashboard />
       </div>
     </div>
   );
